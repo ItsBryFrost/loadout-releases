@@ -1,5 +1,27 @@
 [
   {
+    "version": "0.7.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Window positions in setups", "pt": "Posição das janelas nos setups", "es": "Posición de las ventanas en los setups" },
+        "text": {
+          "en": "Each app in a setup can open on the screen, spot and size you choose, or maximized. Put the app's window where you want it, then press the window button next to it in the setup editor and pick Use where it is now.",
+          "pt": "Cada app de um setup pode abrir na tela, no lugar e no tamanho que você escolher, ou maximizado. Coloque a janela do app onde quiser, depois aperte o botão de janela ao lado dele no editor de setup e escolha Usar onde está agora.",
+          "es": "Cada app de un setup puede abrirse en la pantalla, el lugar y el tamaño que elijas, o maximizada. Pon la ventana de la app donde quieras, luego presiona el botón de ventana junto a ella en el editor de setup y elige Usar donde está ahora."
+        }
+      },
+      {
+        "title": { "en": "Never opened twice", "pt": "Nunca abre duas vezes", "es": "Nunca se abre dos veces" },
+        "text": {
+          "en": "Opening an app that's already open brings its window to the front instead of starting another copy, and setups always leave open apps as they are. An app hiding in the tray, like Discord, comes back up.",
+          "pt": "Abrir um app que já está aberto traz a janela dele para a frente em vez de abrir outra cópia, e os setups sempre deixam os apps abertos como estão. Um app escondido na bandeja, como o Discord, volta a aparecer.",
+          "es": "Abrir una app que ya está abierta trae su ventana al frente en vez de abrir otra copia, y los setups siempre dejan las apps abiertas como están. Una app escondida en la bandeja, como Discord, vuelve a aparecer."
+        }
+      }
+    ]
+  },
+  {
     "version": "0.6.1",
     "date": "2026-11-24",
     "changes": [
