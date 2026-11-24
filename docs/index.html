@@ -243,6 +243,23 @@
   }
   .smartscreen b { color: var(--text); font-weight: 600; }
 
+  /* Patch notes */
+  .notes-sub { margin-top: 10px; color: var(--text-2); font-size: 15px; max-width: 30ch; }
+  .note { padding: 22px 0; border-top: 1px solid var(--border); }
+  .note:first-child { border-top: 0; padding-top: 4px; }
+  .note header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 10px; }
+  .note h3 { font-size: 17px; font-weight: 600; white-space: nowrap; }
+  .note-tag { padding: 1px 8px; border-radius: 4px; background: rgba(255, 106, 43, 0.12); color: var(--accent); font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .note time { margin-left: auto; color: var(--text-3); font-size: 14px; white-space: nowrap; }
+  .note ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--text-2); }
+  .note b { color: var(--text); font-weight: 600; }
+  .notes-more {
+    margin-top: 6px; padding: 10px 14px; border-radius: 6px;
+    background: none; border: 1px solid var(--border); color: var(--text); font: inherit; font-size: 15px; cursor: pointer;
+  }
+  .notes-more:hover { background: var(--surface); }
+  .notes-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   /* FAQ */
   .faq { padding-block: 96px; }
   .faq-grid { display: grid; grid-template-columns: 320px 1fr; gap: 48px; }
@@ -300,6 +317,7 @@
     <nav aria-label="Page">
       <a href="#features" class="hide-sm" data-i18n="nav.features">Features</a>
       <a href="#install" data-i18n="nav.install">Install</a>
+      <a href="#notes" class="hide-sm" data-i18n="nav.notes">Patch notes</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <div class="lang">
@@ -418,6 +436,19 @@
     </div>
   </section>
 
+  <section class="wrap faq" id="notes" hidden>
+    <div class="faq-grid">
+      <div>
+        <h2 data-i18n="notes.h">Patch notes</h2>
+        <p class="notes-sub" data-i18n="notes.sub">What changed in each update. Loadout installs updates by itself.</p>
+      </div>
+      <div>
+        <div id="notes-list"></div>
+        <button type="button" class="notes-more" id="notes-more" aria-controls="notes-list" hidden></button>
+      </div>
+    </div>
+  </section>
+
   <section class="wrap faq" id="faq">
     <div class="faq-grid">
       <h2 data-i18n="faq.h">Questions</h2>
@@ -465,6 +496,8 @@
       "meta.title": "Loadout for Windows",
       "meta.desc": "Loadout opens all the apps you need for streaming or gaming in one click, in the right order. Free for Windows.",
       "nav.features": "Features", "nav.install": "Install", "nav.faq": "FAQ", "lang.label": "Language",
+      "nav.notes": "Patch notes", "notes.h": "Patch notes", "notes.sub": "What changed in each update. Loadout installs updates by itself.",
+      "notes.version": "Version {v}", "notes.latest": "Latest", "notes.more": "Show {n} older versions", "notes.less": "Show fewer",
       "hero.title": "Your whole setup,<br> one click.",
       "hero.lede": "Loadout opens Discord, OBS, your game and everything else you need, in the order you choose. It waits where you tell it to and skips anything that's already open.",
       "cta.download": "Download for Windows", "cta.free": "Free", "cta.freeVersion": "Free, version {v}", "cta.os": "Windows 10 and 11",
@@ -506,6 +539,8 @@
       "meta.title": "Loadout para Windows",
       "meta.desc": "O Loadout abre todos os apps que você usa para fazer live ou jogar com um clique, na ordem certa. Grátis para Windows.",
       "nav.features": "Recursos", "nav.install": "Instalar", "nav.faq": "Perguntas", "lang.label": "Idioma",
+      "nav.notes": "Notas de atualização", "notes.h": "Notas de atualização", "notes.sub": "O que mudou em cada atualização. O Loadout instala as atualizações sozinho.",
+      "notes.version": "Versão {v}", "notes.latest": "Mais recente", "notes.more": "Mostrar {n} versões anteriores", "notes.less": "Mostrar menos",
       "hero.title": "Seu setup inteiro,<br> em um clique.",
       "hero.lede": "O Loadout abre o Discord, o OBS, seu jogo e tudo mais que você precisa, na ordem que você escolher. Ele espera onde você mandar e pula o que já estiver aberto.",
       "cta.download": "Baixar para Windows", "cta.free": "Grátis", "cta.freeVersion": "Grátis, versão {v}", "cta.os": "Windows 10 e 11",
@@ -547,6 +582,8 @@
       "meta.title": "Loadout para Windows",
       "meta.desc": "Loadout abre todas las apps que usas para hacer stream o jugar con un clic, en el orden correcto. Gratis para Windows.",
       "nav.features": "Funciones", "nav.install": "Instalar", "nav.faq": "Preguntas", "lang.label": "Idioma",
+      "nav.notes": "Notas de la versión", "notes.h": "Notas de la versión", "notes.sub": "Qué cambió en cada actualización. Loadout instala las actualizaciones por su cuenta.",
+      "notes.version": "Versión {v}", "notes.latest": "Más reciente", "notes.more": "Mostrar {n} versiones anteriores", "notes.less": "Mostrar menos",
       "hero.title": "Todo tu setup,<br> en un clic.",
       "hero.lede": "Loadout abre Discord, OBS, tu juego y todo lo demás que necesitas, en el orden que elijas. Espera donde le digas y se salta lo que ya esté abierto.",
       "cta.download": "Descargar para Windows", "cta.free": "Gratis", "cta.freeVersion": "Gratis, versión {v}", "cta.os": "Windows 10 y 11",
@@ -628,6 +665,7 @@
     document.querySelector(".js-version").textContent = release ? t("cta.freeVersion", { v: release.version }) : t("cta.free");
     document.querySelector(".js-file").textContent = release ? t("s1.file", { name: release.file, mb: release.mb }) : t("s1.p");
     demo.render();
+    renderNotes();
   }
 
   // Language menu
@@ -714,6 +752,45 @@
     }
     return { render: render };
   })();
+
+  // ---------- Patch notes (website/changelog.json, the same list the app shows) ----------
+  var notes = null;
+  var notesAll = false;
+  var SHOWN = 3;
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
+  }
+  function noteDate(iso) {
+    return new Date(iso + "T12:00:00").toLocaleDateString(HTML_LANG[lang], { year: "numeric", month: "long", day: "numeric" });
+  }
+  function renderNotes() {
+    if (!notes) return;
+    var shown = notesAll ? notes : notes.slice(0, SHOWN);
+    document.getElementById("notes-list").innerHTML = shown.map(function (r, i) {
+      return '<article class="note"><header><h3>' + esc(t("notes.version", { v: r.version })) + "</h3>" +
+        (i === 0 ? '<span class="note-tag">' + esc(t("notes.latest")) + "</span>" : "") +
+        '<time datetime="' + esc(r.date) + '">' + esc(noteDate(r.date)) + "</time></header><ul>" +
+        r.changes.map(function (c) {
+          return "<li><b>" + esc(c.title[lang] || c.title.en) + ".</b> " + esc(c.text[lang] || c.text.en) + "</li>";
+        }).join("") + "</ul></article>";
+    }).join("");
+    var more = document.getElementById("notes-more");
+    more.hidden = notes.length <= SHOWN;
+    more.textContent = notesAll ? t("notes.less") : t("notes.more", { n: notes.length - SHOWN });
+    more.setAttribute("aria-expanded", String(notesAll));
+  }
+  document.getElementById("notes-more").addEventListener("click", function () {
+    notesAll = !notesAll;
+    renderNotes();
+  });
+  fetch("changelog.json", { cache: "no-cache" })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (list) {
+      notes = list;
+      document.getElementById("notes").hidden = false;
+      renderNotes();
+    })
+    .catch(function () { /* the section stays hidden */ });
 
   applyLanguage();
 

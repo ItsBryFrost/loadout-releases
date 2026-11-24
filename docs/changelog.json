@@ -1,0 +1,178 @@
+[
+  {
+    "version": "0.6.1",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Patch notes", "pt": "Notas de atualização", "es": "Notas de la versión" },
+        "text": {
+          "en": "Settings → Patch notes shows what changed in each update, with the version you have marked. The same list is on the website.",
+          "pt": "Configurações → Notas de atualização mostra o que mudou em cada atualização, com a sua versão marcada. A mesma lista está no site.",
+          "es": "Configuración → Notas de la versión muestra qué cambió en cada actualización, con tu versión marcada. La misma lista está en el sitio web."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.6.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Put pinned apps in order", "pt": "Coloque os apps fixados em ordem", "es": "Ordena las apps fijadas" },
+        "text": {
+          "en": "Drag the apps in Home's Pinned row where you want them, or select one and press Ctrl with the arrow keys. A newly pinned app goes at the end.",
+          "pt": "Arraste os apps da fileira Fixados do Início para onde quiser, ou selecione um e aperte Ctrl com as setas. Um app fixado agora vai para o fim.",
+          "es": "Arrastra las apps de la fila Fijadas de Inicio adonde quieras, o selecciona una y presiona Ctrl con las flechas. Una app recién fijada va al final."
+        }
+      },
+      {
+        "title": { "en": "Rename from the menu", "pt": "Renomeie pelo menu", "es": "Cambia el nombre desde el menú" },
+        "text": {
+          "en": "Right-click any app or setup and pick Rename… to change its name without opening the full editor.",
+          "pt": "Clique com o botão direito em um app ou setup e escolha Renomear… para mudar o nome sem abrir o editor completo.",
+          "es": "Haz clic derecho en una app o setup y elige Cambiar nombre… para cambiarlo sin abrir el editor completo."
+        }
+      },
+      {
+        "title": { "en": "Report a problem", "pt": "Relate um problema", "es": "Informa un problema" },
+        "text": {
+          "en": "Settings → Report a problem opens a form on GitHub with your Loadout and Windows versions already filled in. Nothing about your apps or files is included.",
+          "pt": "Configurações → Relatar um problema abre um formulário no GitHub com as versões do Loadout e do Windows já preenchidas. Nada sobre seus apps ou arquivos é incluído.",
+          "es": "Configuración → Informar un problema abre un formulario en GitHub con las versiones de Loadout y Windows ya completadas. No se incluye nada sobre tus apps o archivos."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.5.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Back up and restore", "pt": "Backup e restauração", "es": "Copia de seguridad y restauración" },
+        "text": {
+          "en": "Settings → Backup saves your apps, setups, settings and icons to one file. Restore it on a new PC, or right from the welcome screen. Loadout keeps a copy of what you had before restoring, just in case.",
+          "pt": "Configurações → Backup salva seus apps, setups, configurações e ícones em um arquivo. Restaure em um PC novo, ou direto na tela de boas-vindas. O Loadout guarda uma cópia do que você tinha antes de restaurar, por precaução.",
+          "es": "Configuración → Copia de seguridad guarda tus apps, setups, configuración e íconos en un archivo. Restáurala en una PC nueva, o directamente desde la pantalla de bienvenida. Loadout guarda una copia de lo que tenías antes de restaurar, por si acaso."
+        }
+      },
+      {
+        "title": { "en": "Share a setup", "pt": "Compartilhe um setup", "es": "Comparte un setup" },
+        "text": {
+          "en": "Pick Export… from a setup's menu to save it as a file, and Import setup on the Setups page to bring it in, or drop the file onto the window. Apps you already have are reused; any that aren't on this PC show up as missing so you can locate them.",
+          "pt": "Escolha Exportar… no menu de um setup para salvá-lo em um arquivo, e Importar setup na página Setups para trazê-lo, ou solte o arquivo na janela. Apps que você já tem são reaproveitados; os que não estão neste PC aparecem como não encontrados para você localizar.",
+          "es": "Elige Exportar… en el menú de un setup para guardarlo como archivo, e Importar setup en la página Setups para traerlo, o suelta el archivo en la ventana. Las apps que ya tienes se reutilizan; las que no están en esta PC aparecen como no encontradas para que las localices."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.4.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Português and Español", "pt": "Português e Español", "es": "Português y Español" },
+        "text": {
+          "en": "Loadout now speaks English, Portuguese and Spanish. Pick yours under Settings → Language, or on the welcome screen. Everything follows the choice, including the tray menu. Until you pick one, Loadout uses Windows' display language.",
+          "pt": "O Loadout agora fala inglês, português e espanhol. Escolha o seu em Configurações → Idioma, ou na tela de boas-vindas. Tudo segue a escolha, inclusive o menu da bandeja. Até você escolher, o Loadout usa o idioma do Windows.",
+          "es": "Loadout ahora habla inglés, portugués y español. Elige el tuyo en Configuración → Idioma, o en la pantalla de bienvenida. Todo sigue tu elección, incluido el menú de la bandeja. Hasta que elijas uno, Loadout usa el idioma de Windows."
+        }
+      },
+      {
+        "title": { "en": "The website too", "pt": "O site também", "es": "El sitio web también" },
+        "text": {
+          "en": "The download page has the same three languages, with a picker at the top.",
+          "pt": "A página de download tem os mesmos três idiomas, com um seletor no topo.",
+          "es": "La página de descarga tiene los mismos tres idiomas, con un selector arriba."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.3.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Websites", "pt": "Sites", "es": "Sitios web" },
+        "text": {
+          "en": "Add your stream dashboard, chat popout or any site with Add website on the Apps page, or right from the setup editor. It opens in your default browser, as its own tile or as a step in a setup.",
+          "pt": "Adicione seu painel de live, o chat em janela ou qualquer site com Adicionar site na página Apps, ou direto no editor de setup. Ele abre no seu navegador padrão, sozinho ou como etapa de um setup.",
+          "es": "Agrega tu panel de stream, el chat en ventana o cualquier sitio con Agregar sitio web en la página Apps, o desde el editor de setup. Se abre en tu navegador predeterminado, solo o como paso de un setup."
+        }
+      },
+      {
+        "title": { "en": "Steam and Epic games", "pt": "Jogos da Steam e da Epic", "es": "Juegos de Steam y Epic" },
+        "text": {
+          "en": "Find installed apps now lists the games you have in Steam and the Epic Games Launcher, even ones without a desktop shortcut. They start through the launcher, and Loadout knows when a game is running.",
+          "pt": "Encontrar apps instalados agora lista os jogos que você tem na Steam e na Epic Games Launcher, mesmo os sem atalho na área de trabalho. Eles abrem pela launcher, e o Loadout sabe quando um jogo está aberto.",
+          "es": "Buscar apps instaladas ahora muestra los juegos que tienes en Steam y Epic Games Launcher, incluso los que no tienen acceso directo. Se inician a través del launcher, y Loadout sabe cuándo un juego está abierto."
+        }
+      },
+      {
+        "title": { "en": "A shortcut for each setup", "pt": "Um atalho para cada setup", "es": "Un atajo para cada setup" },
+        "text": {
+          "en": "Give a setup its own key combination in the setup editor and press it anywhere in Windows to launch it, even with Loadout in the tray.",
+          "pt": "Dê a um setup sua própria combinação de teclas no editor e aperte em qualquer lugar do Windows para iniciá-lo, mesmo com o Loadout na bandeja.",
+          "es": "Dale a un setup su propia combinación de teclas en el editor y presiónala en cualquier parte de Windows para iniciarlo, incluso con Loadout en la bandeja."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.2.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Home page", "pt": "Página Início", "es": "Página Inicio" },
+        "text": {
+          "en": "Loadout now opens on Home: your setups (most used first), setups that are still open with Close all, and pinned apps with a dot on the ones running.",
+          "pt": "O Loadout agora abre no Início: seus setups (os mais usados primeiro), setups ainda abertos com Fechar tudo, e apps fixados com um ponto nos que estão abertos.",
+          "es": "Loadout ahora abre en Inicio: tus setups (los más usados primero), los setups que siguen abiertos con Cerrar todo, y las apps fijadas con un punto en las que están abiertas."
+        }
+      },
+      {
+        "title": { "en": "Pin to Home", "pt": "Fixar no Início", "es": "Fijar en Inicio" },
+        "text": {
+          "en": "Right-click any app and choose Pin to Home. Until you pin something, your most-opened apps show there.",
+          "pt": "Clique com o botão direito em um app e escolha Fixar no Início. Até você fixar algo, seus apps mais abertos aparecem ali.",
+          "es": "Haz clic derecho en una app y elige Fijar en Inicio. Hasta que fijes algo, ahí aparecen las apps que más abres."
+        }
+      },
+      {
+        "title": { "en": "Up next", "pt": "Sugestão", "es": "Sugerencia" },
+        "text": {
+          "en": "After a couple of weeks, Home suggests what you usually launch at this time, like your stream setup on Friday evenings. It learns from a launch history that never leaves your PC.",
+          "pt": "Depois de algumas semanas, o Início sugere o que você costuma abrir neste horário, como seu setup de live na sexta à noite. Ele aprende com um histórico que nunca sai do seu PC.",
+          "es": "Después de un par de semanas, Inicio sugiere lo que sueles abrir a esta hora, como tu setup de stream los viernes por la noche. Aprende de un historial que nunca sale de tu PC."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.1.1",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "Fix", "pt": "Correção", "es": "Corrección" },
+        "text": {
+          "en": "Ticking an app in the welcome screen (or in Find installed apps) no longer makes the page jump out of view.",
+          "pt": "Marcar um app na tela de boas-vindas (ou em Encontrar apps instalados) não faz mais a página pular para fora da vista.",
+          "es": "Marcar una app en la pantalla de bienvenida (o en Buscar apps instaladas) ya no hace que la página salte fuera de la vista."
+        }
+      }
+    ]
+  },
+  {
+    "version": "0.1.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": { "en": "First release", "pt": "Primeira versão", "es": "Primera versión" },
+        "text": {
+          "en": "Keep your apps in one place and open whole setups with one click, in order, with delays and skipping what's already open. Quick search with a global shortcut, a tray menu, start with Windows, and updates that install themselves.",
+          "pt": "Guarde seus apps em um só lugar e abra setups inteiros com um clique, em ordem, com esperas e pulando o que já está aberto. Busca rápida com atalho global, menu na bandeja, iniciar com o Windows e atualizações que se instalam sozinhas.",
+          "es": "Reúne tus apps en un solo lugar y abre setups completos con un clic, en orden, con esperas y omitiendo lo que ya está abierto. Búsqueda rápida con atajo global, menú en la bandeja, inicio con Windows y actualizaciones que se instalan solas."
+        }
+      }
+    ]
+  }
+]
