@@ -1,5 +1,35 @@
 [
   {
+    "version": "0.8.0",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": {
+          "en": "Loadout on your Discord profile",
+          "pt": "Loadout no seu perfil do Discord",
+          "es": "Loadout en tu perfil de Discord"
+        },
+        "text": {
+          "en": "While Loadout runs, Discord shows Playing Loadout with Loadout's own logo and a Get Loadout button that opens the website, instead of an old game that happens to share the name. Nothing about your apps or setups is shared. Turn it off under Settings → Show on Discord. The program file is now called Loadout Launcher, so if you pinned Loadout to the taskbar, pin it again.",
+          "pt": "Enquanto o Loadout está aberto, o Discord mostra Jogando Loadout com o logo do próprio Loadout e um botão Get Loadout que abre o site, em vez de um jogo antigo com o mesmo nome. Nada sobre seus apps ou setups é compartilhado. Desative em Configurações → Mostrar no Discord. O programa agora se chama Loadout Launcher, então se você fixou o Loadout na barra de tarefas, fixe de novo.",
+          "es": "Mientras Loadout está abierto, Discord muestra Jugando a Loadout con el logo de Loadout y un botón Get Loadout que abre el sitio web, en vez de un juego antiguo con el mismo nombre. No se comparte nada sobre tus apps o setups. Desactívalo en Configuración → Mostrar en Discord. El programa ahora se llama Loadout Launcher, así que si fijaste Loadout en la barra de tareas, fíjalo otra vez."
+        }
+      },
+      {
+        "title": {
+          "en": "Updates go straight to the newest version",
+          "pt": "Atualizações vão direto para a versão mais nova",
+          "es": "Las actualizaciones van directo a la versión más nueva"
+        },
+        "text": {
+          "en": "Update now always installs the latest release. Before, if several came out since Loadout last checked, it installed the next one only and you had to update again.",
+          "pt": "Atualizar agora sempre instala a versão mais recente. Antes, se várias tinham saído desde a última verificação, o Loadout instalava só a próxima e era preciso atualizar de novo.",
+          "es": "Actualizar ahora siempre instala la versión más reciente. Antes, si habían salido varias desde la última comprobación, Loadout instalaba solo la siguiente y había que actualizar otra vez."
+        }
+      }
+    ]
+  },
+  {
     "version": "0.7.0",
     "date": "2026-11-24",
     "changes": [
