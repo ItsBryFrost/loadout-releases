@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loadout for Windows</title>
+<meta name="description" content="Loadout opens all the apps you need for streaming or gaming in one click, in the right order. Free for Windows.">
+<meta property="og:title" content="Loadout">
+<meta property="og:description" content="Open your whole setup in one click. Free for Windows.">
+<meta property="og:image" content="home.png">
+<link rel="icon" href="favicon.png">
+<style>
+  :root {
+    --bg: #121315;
+    --bg-deep: #0d0e10;
+    --surface: #17181b;
+    --surface-2: #1c1d21;
+    --border: #24262b;
+    --border-strong: #31333a;
+    --text: #ececee;
+    --text-2: #a3a5ac;
+    --text-3: #6b6e76;
+    --accent: #ff6a2b;
+    --accent-hover: #ff7f48;
+    --accent-fg: #1a0b03;
+    --ok: #3dd68c;
+    --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-display: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 24px; }
+
+  /* Top bar */
+  .top { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; text-decoration: none; }
+  .brand img { width: 28px; height: 28px; }
+  .top nav { display: flex; gap: 24px; font-size: 14px; color: var(--text-2); }
+  .top nav a { text-decoration: none; }
+  .top nav a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items: center;
+    padding-block: 72px 88px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(40px, 5.6vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+  .lede { font-size: 18px; color: var(--text-2); max-width: 46ch; margin: 0 0 32px; }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: var(--accent-fg);
+    font: 600 16px/1 var(--font);
+    padding: 15px 22px; border-radius: 6px; border: 0;
+    text-decoration: none; cursor: pointer;
+    transition: background 120ms var(--ease);
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn svg { width: 18px; height: 18px; }
+  .cta-meta { font-size: 14px; color: var(--text-3); }
+  .cta-meta a { color: var(--text-2); }
+
+  /* Live setup panel */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 20px 12px;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .panel-title { font-weight: 600; font-size: 17px; }
+  .panel-sub { font-size: 13px; color: var(--text-3); }
+  .panel-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--accent); color: var(--accent-fg);
+    font: 600 13px/1 var(--font); padding: 9px 13px;
+    border: 0; border-radius: 5px; cursor: pointer;
+  }
+  .panel-btn:hover { background: var(--accent-hover); }
+  .panel-btn[aria-pressed="true"] { background: var(--surface-2); color: var(--text-2); box-shadow: inset 0 0 0 1px var(--border-strong); }
+  .panel-btn svg { width: 12px; height: 12px; }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .tile {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: grid; place-items: center;
+    font: 700 14px/1 var(--font);
+    background: var(--surface-2); color: var(--text-3);
+    box-shadow: inset 0 0 0 1px var(--border-strong);
+    transition: background 200ms var(--ease), color 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  .step-name { font-weight: 600; font-size: 15px; }
+  .step-note { font-size: 13px; color: var(--text-3); }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-3); min-width: 92px; justify-content: flex-end;
+    font-variant-numeric: tabular-nums;
+  }
+  .status::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border-strong);
+    transition: background 200ms var(--ease);
+  }
+  .step[data-state="starting"] .status { color: var(--text); }
+  .step[data-state="starting"] .status::before { background: var(--accent); animation: pulse 0.8s ease-in-out infinite alternate; }
+  .step[data-state="running"] .status { color: var(--text-2); }
+  .step[data-state="running"] .status::before { background: var(--ok); }
+  .step[data-state="running"] .tile,
+  .step[data-state="starting"] .tile { color: #fff; box-shadow: none; }
+  .step[data-state="running"] .tile.d, .step[data-state="starting"] .tile.d { background: #5865f2; }
+  .step[data-state="running"] .tile.o, .step[data-state="starting"] .tile.o { background: #302e31; }
+  .step[data-state="running"] .tile.f, .step[data-state="starting"] .tile.f { background: #f40552; }
+  @keyframes pulse { from { opacity: 1; } to { opacity: 0.35; } }
+  .panel-foot { font-size: 13px; color: var(--text-3); padding: 12px 0 4px; border-top: 1px solid var(--border); min-height: 1.55em; }
+
+  /* Screenshot */
+  .shot { padding-bottom: 104px; }
+  .shot figure { margin: 0; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8);
+  }
+  .shot figcaption { margin-top: 14px; font-size: 14px; color: var(--text-3); max-width: 70ch; }
+
+  /* Features */
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600; font-size: clamp(28px, 3.4vw, 38px);
+    line-height: 1.12; letter-spacing: -0.02em;
+    margin: 0 0 16px;
+  }
+  .features { padding-bottom: 104px; }
+  .feature {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 48px;
+    padding: 36px 0;
+    border-top: 1px solid var(--border);
+  }
+  .feature h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.25; margin: 0; letter-spacing: -0.01em; }
+  .feature p { margin: 0 0 12px; color: var(--text-2); max-width: 62ch; }
+  .feature p:last-child { margin-bottom: 0; }
+  kbd {
+    font: 600 13px/1 var(--font);
+    background: var(--surface-2); color: var(--text);
+    border: 1px solid var(--border-strong); border-bottom-width: 2px;
+    border-radius: 4px; padding: 3px 6px;
+    white-space: nowrap;
+  }
+
+  /* Install */
+  .install { padding: 72px 0 96px; background: var(--bg-deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .install-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; }
+  .install .intro { color: var(--text-2); max-width: 40ch; margin: 0 0 28px; }
+  .howto { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  .howto li {
+    counter-increment: s;
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+  }
+  .howto li:first-child { border-top: 0; padding-top: 0; }
+  .howto li::before {
+    content: counter(s);
+    width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center;
+    font: 600 15px/1 var(--font);
+    color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent);
+  }
+  .howto strong { display: block; font-size: 17px; margin: 3px 0 4px; }
+  .howto span { color: var(--text-2); }
+  .smartscreen {
+    margin-top: 6px; padding: 14px 16px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    font-size: 15px; color: var(--text-2);
+  }
+  .smartscreen b { color: var(--text); font-weight: 600; }
+
+  /* FAQ */
+  .faq { padding-block: 96px; }
+  .faq-grid { display: grid; grid-template-columns: 320px 1fr; gap: 48px; }
+  details { border-top: 1px solid var(--border); }
+  details:last-child { border-bottom: 1px solid var(--border); }
+  summary {
+    list-style: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 18px 0; font-weight: 600; font-size: 17px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: ""; flex: none; width: 9px; height: 9px;
+    border-right: 2px solid var(--text-3); border-bottom: 2px solid var(--text-3);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 160ms var(--ease);
+  }
+  details[open] summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+  details p { margin: 0 0 20px; color: var(--text-2); max-width: 62ch; }
+
+  /* Footer */
+  footer { padding: 40px 0 56px; border-top: 1px solid var(--border); font-size: 14px; color: var(--text-3); }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; }
+  .foot nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .foot a { color: var(--text-2); text-decoration: none; }
+  .foot a:hover { color: var(--text); text-decoration: underline; }
+
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding-block: 40px 64px; }
+    .feature, .faq-grid, .install-grid { grid-template-columns: 1fr; gap: 14px; }
+    .feature { padding: 28px 0; }
+    .faq-grid, .install-grid { gap: 28px; }
+    .shot, .features { padding-bottom: 72px; }
+    .faq { padding-block: 72px; }
+    .top nav a.hide-sm { display: none; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding-inline: 16px; }
+    .lede { font-size: 17px; }
+    .btn { width: 100%; justify-content: center; }
+    .panel { padding: 16px 16px 8px; }
+    .status { min-width: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="./"><img src="icon.png" alt="" width="28" height="28">Loadout</a>
+  <nav aria-label="Page">
+    <a href="#features" class="hide-sm">Features</a>
+    <a href="#install">Install</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <h1>Your whole setup,<br> one click.</h1>
+      <p class="lede">Loadout opens Discord, OBS, your game and everything else you need, in the order you choose. It waits where you tell it to and skips anything that's already open.</p>
+      <div class="cta">
+        <a class="btn js-download" href="https://github.com/ItsBryFrost/loadout-releases/releases/latest">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download for Windows
+        </a>
+        <span class="cta-meta"><span class="js-version">Free</span> · Windows 10 and 11</span>
+      </div>
+    </div>
+
+    <div class="panel" aria-label="Example: a setup called FiveM Stream">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">FiveM Stream</div>
+          <div class="panel-sub">3 apps</div>
+        </div>
+        <button class="panel-btn" type="button" id="demo-run">
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>
+          <span>Launch</span>
+        </button>
+      </div>
+      <ol class="steps">
+        <li class="step" data-state="idle">
+          <span class="tile d" aria-hidden="true">D</span>
+          <div><div class="step-name">Discord</div><div class="step-note">Opens first</div></div>
+          <span class="status">Waiting</span>
+        </li>
+        <li class="step" data-state="idle">
+          <span class="tile o" aria-hidden="true">O</span>
+          <div><div class="step-name">OBS Studio</div><div class="step-note">3 seconds later</div></div>
+          <span class="status">Waiting</span>
+        </li>
+        <li class="step" data-state="idle">
+          <span class="tile f" aria-hidden="true">F</span>
+          <div><div class="step-name">FiveM</div><div class="step-note">Once OBS is up</div></div>
+          <span class="status">Waiting</span>
+        </li>
+      </ol>
+      <div class="panel-foot" id="demo-foot" aria-live="polite">Press Launch to see it run.</div>
+    </div>
+  </section>
+
+  <section class="wrap shot" aria-label="Screenshot">
+    <figure>
+      <img src="home.png" width="1400" height="900" alt="The Loadout Home screen: a suggestion to launch FiveM Stream, three setup cards, and a row of pinned apps with green dots on the ones running.">
+      <figcaption>Home shows your setups, what's still running, and the apps you pinned. After a couple of weeks it starts suggesting the setup you usually open at this time of day.</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap features" id="features">
+    <h2>Made for the five minutes before you go live</h2>
+    <div class="feature">
+      <h3>Setups</h3>
+      <div>
+        <p>A setup is a list of apps that open together. Put them in order, add a pause where one app needs time to load, and launch the whole thing from Home, the tray, or a search.</p>
+        <p>When you're done, close the whole setup in one go instead of hunting through the taskbar.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <h3>Finds your apps for you</h3>
+      <div>
+        <p>The first time you open Loadout, it lists the programs installed on your PC and suggests the ones you probably want. Tick them and you're set. You can also drop in any shortcut or .exe.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <h3>Out of the way</h3>
+      <div>
+        <p>Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> from anywhere to search your apps and setups. Loadout can start with Windows and sit in the tray until you need it.</p>
+        <p>Everything stays on your PC. There's no account, and updates install themselves when you say so.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="install" id="install">
+    <div class="wrap install-grid">
+      <div>
+        <h2>Install</h2>
+        <p class="intro">About a minute, start to finish. No admin rights needed.</p>
+        <a class="btn js-download" href="https://github.com/ItsBryFrost/loadout-releases/releases/latest">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download for Windows
+        </a>
+      </div>
+      <ol class="howto">
+        <li><div><strong>Download the installer</strong><span class="js-file">It's a single .exe file of a few megabytes.</span></div></li>
+        <li>
+          <div>
+            <strong>Run it</strong>
+            <span>Windows may show a blue box saying it protected your PC. That's because Loadout is new and not yet code-signed.</span>
+            <div class="smartscreen">Click <b>More info</b>, then <b>Run anyway</b>.</div>
+          </div>
+        </li>
+        <li><div><strong>Pick your apps</strong><span>Loadout opens and helps you add your apps and build your first setup.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap faq" id="faq">
+    <div class="faq-grid">
+      <h2>Questions</h2>
+      <div>
+        <details>
+          <summary>Is it free?</summary>
+          <p>Yes. No trial, no account, no ads.</p>
+        </details>
+        <details>
+          <summary>Why does Windows warn me about it?</summary>
+          <p>Windows SmartScreen warns about any app that isn't code-signed and hasn't been downloaded by many people yet. Loadout doesn't need admin rights and installs only into your user folder. If you'd rather not run it, that's fine too.</p>
+        </details>
+        <details>
+          <summary>Does it work with games from Steam or Epic?</summary>
+          <p>Yes. Add the game's shortcut, or the Steam or Epic launcher itself. Direct support for game library links is coming in the next update.</p>
+        </details>
+        <details>
+          <summary>How do updates work?</summary>
+          <p>Loadout checks for a new version in the background and shows a small notice. Click it and the update installs and restarts the app. Your setups stay as they were.</p>
+        </details>
+        <details>
+          <summary>How do I uninstall it?</summary>
+          <p>Open Settings › Apps › Installed apps in Windows, find Loadout and choose Uninstall. It also stops Loadout from starting with Windows.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Loadout, for Windows</span>
+    <nav aria-label="Links">
+      <a href="https://github.com/ItsBryFrost/loadout-releases/issues/new">Report a problem</a>
+      <a href="https://github.com/ItsBryFrost/loadout-releases/releases">All versions</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Point the download buttons straight at the latest installer.
+  var REPO = "ItsBryFrost/loadout-releases";
+  fetch("https://api.github.com/repos/" + REPO + "/releases/latest", { headers: { Accept: "application/vnd.github+json" } })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (rel) {
+      var exe = (rel.assets || []).find(function (a) { return /-setup\.exe$/i.test(a.name); });
+      if (!exe) return;
+      document.querySelectorAll(".js-download").forEach(function (a) { a.href = exe.browser_download_url; });
+      var v = String(rel.tag_name || "").replace(/^v/, "");
+      var mb = (exe.size / 1048576).toFixed(1);
+      if (v) document.querySelector(".js-version").textContent = "Free, version " + v;
+      document.querySelector(".js-file").textContent = exe.name + ", " + mb + " MB.";
+    })
+    .catch(function () { /* the buttons already link to the releases page */ });
+
+  // The demo panel: steps light up in order, the way a real setup launches.
+  var btn = document.getElementById("demo-run");
+  var label = btn.querySelector("span");
+  var foot = document.getElementById("demo-foot");
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var timers = [];
+  var running = false;
+
+  function set(i, state, text) {
+    steps[i].dataset.state = state;
+    steps[i].querySelector(".status").textContent = text;
+  }
+  function later(ms, fn) { timers.push(setTimeout(fn, ms)); }
+  function reset() {
+    timers.forEach(clearTimeout); timers = [];
+    steps.forEach(function (_, i) { set(i, "idle", "Waiting"); });
+    running = false;
+    btn.setAttribute("aria-pressed", "false");
+    label.textContent = "Launch";
+  }
+  function done() {
+    foot.textContent = "All 3 apps running.";
+    label.textContent = "Close all";
+  }
+  function run() {
+    running = true;
+    btn.setAttribute("aria-pressed", "true");
+    label.textContent = "Launching";
+    if (reduce) {
+      steps.forEach(function (_, i) { set(i, "running", "Running"); });
+      done();
+      return;
+    }
+    foot.textContent = "Opening Discord";
+    set(0, "starting", "Starting");
+    later(900, function () { set(0, "running", "Running"); set(1, "idle", "In 3s"); foot.textContent = "Waiting 3 seconds before OBS"; });
+    later(1900, function () { set(1, "idle", "In 2s"); });
+    later(2900, function () { set(1, "idle", "In 1s"); });
+    later(3900, function () { set(1, "starting", "Starting"); foot.textContent = "Opening OBS Studio"; });
+    later(4900, function () { set(1, "running", "Running"); set(2, "starting", "Starting"); foot.textContent = "Opening FiveM"; });
+    later(6100, function () { set(2, "running", "Running"); done(); });
+  }
+  btn.addEventListener("click", function () {
+    if (running) { reset(); foot.textContent = "Closed. Press Launch to run it again."; }
+    else run();
+  });
+
+  // Run once by itself when the panel first comes into view.
+  if (!reduce && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { io.disconnect(); setTimeout(function () { if (!running) run(); }, 600); }
+    }, { threshold: 0.4 });
+    io.observe(document.querySelector(".panel"));
+  }
+})();
+</script>
+</body>
+</html>
