@@ -52,6 +52,38 @@
   .top nav { display: flex; gap: 24px; font-size: 14px; color: var(--text-2); }
   .top nav a { text-decoration: none; }
   .top nav a:hover { color: var(--text); }
+  .top-right { display: flex; align-items: center; gap: 24px; }
+
+  /* Language picker */
+  .lang { position: relative; }
+  .lang-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    height: 32px; padding: 0 9px;
+    background: transparent; color: var(--text-2);
+    border: 1px solid var(--border-strong); border-radius: 6px;
+    font: 600 13px/1 var(--font); cursor: pointer;
+  }
+  .lang-btn:hover, .lang-btn[aria-expanded="true"] { color: var(--text); background: var(--surface); }
+  .lang-btn .chev { width: 10px; height: 10px; }
+  .flag { display: inline-block; width: 20px; height: 14px; border-radius: 2px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08); }
+  .flag svg { display: block; width: 100%; height: 100%; }
+  .lang-menu {
+    position: absolute; right: 0; top: calc(100% + 6px); z-index: 10;
+    list-style: none; margin: 0; padding: 4px; min-width: 170px;
+    background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: 8px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  }
+  .lang-menu button {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    padding: 9px 10px; border: 0; border-radius: 5px;
+    background: transparent; color: var(--text); font: 14px/1.2 var(--font); text-align: left; cursor: pointer;
+  }
+  .lang-menu button:hover, .lang-menu button:focus-visible { background: var(--border); outline: none; }
+  .lang-menu button[aria-checked="true"]::after {
+    content: ""; margin-left: auto; width: 8px; height: 4px;
+    border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+    transform: rotate(-45deg) translateY(-2px);
+  }
 
   /* Hero */
   .hero {
@@ -246,6 +278,7 @@
     .shot, .features { padding-bottom: 72px; }
     .faq { padding-block: 72px; }
     .top nav a.hide-sm { display: none; }
+    .top-right, .top nav { gap: 16px; }
   }
   @media (max-width: 480px) {
     .wrap { padding-inline: 16px; }
@@ -263,32 +296,46 @@
 
 <header class="wrap top">
   <a class="brand" href="./"><img src="icon.png" alt="" width="28" height="28">Loadout</a>
-  <nav aria-label="Page">
-    <a href="#features" class="hide-sm">Features</a>
-    <a href="#install">Install</a>
-    <a href="#faq">FAQ</a>
-  </nav>
+  <div class="top-right">
+    <nav aria-label="Page">
+      <a href="#features" class="hide-sm" data-i18n="nav.features">Features</a>
+      <a href="#install" data-i18n="nav.install">Install</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="lang">
+      <button class="lang-btn" type="button" id="lang-btn" aria-haspopup="true" aria-expanded="false" data-i18n-aria="lang.label" aria-label="Language">
+        <span class="flag" id="lang-flag" aria-hidden="true"></span>
+        <span id="lang-code">EN</span>
+        <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="lang-menu" id="lang-menu" role="menu" hidden>
+        <li role="none"><button type="button" role="menuitemradio" data-lang="en"><span class="flag" data-flag="en" aria-hidden="true"></span>English</button></li>
+        <li role="none"><button type="button" role="menuitemradio" data-lang="pt"><span class="flag" data-flag="pt" aria-hidden="true"></span>Português</button></li>
+        <li role="none"><button type="button" role="menuitemradio" data-lang="es"><span class="flag" data-flag="es" aria-hidden="true"></span>Español</button></li>
+      </ul>
+    </div>
+  </div>
 </header>
 
 <main>
   <section class="wrap hero">
     <div>
-      <h1>Your whole setup,<br> one click.</h1>
-      <p class="lede">Loadout opens Discord, OBS, your game and everything else you need, in the order you choose. It waits where you tell it to and skips anything that's already open.</p>
+      <h1 data-i18n-html="hero.title">Your whole setup,<br> one click.</h1>
+      <p class="lede" data-i18n="hero.lede">Loadout opens Discord, OBS, your game and everything else you need, in the order you choose. It waits where you tell it to and skips anything that's already open.</p>
       <div class="cta">
         <a class="btn js-download" href="https://github.com/ItsBryFrost/loadout-releases/releases/latest">
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download for Windows
+          <span data-i18n="cta.download">Download for Windows</span>
         </a>
-        <span class="cta-meta"><span class="js-version">Free</span> · Windows 10 and 11</span>
+        <span class="cta-meta"><span class="js-version">Free</span> · <span data-i18n="cta.os">Windows 10 and 11</span></span>
       </div>
     </div>
 
-    <div class="panel" aria-label="Example: a setup called FiveM Stream">
+    <div class="panel" data-i18n-aria="panel.aria" aria-label="Example: a setup called FiveM Stream">
       <div class="panel-head">
         <div>
           <div class="panel-title">FiveM Stream</div>
-          <div class="panel-sub">3 apps</div>
+          <div class="panel-sub" data-i18n="panel.sub">3 apps</div>
         </div>
         <button class="panel-btn" type="button" id="demo-run">
           <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>
@@ -298,17 +345,17 @@
       <ol class="steps">
         <li class="step" data-state="idle">
           <span class="tile d" aria-hidden="true">D</span>
-          <div><div class="step-name">Discord</div><div class="step-note">Opens first</div></div>
+          <div><div class="step-name">Discord</div><div class="step-note" data-i18n="step.first">Opens first</div></div>
           <span class="status">Waiting</span>
         </li>
         <li class="step" data-state="idle">
           <span class="tile o" aria-hidden="true">O</span>
-          <div><div class="step-name">OBS Studio</div><div class="step-note">3 seconds later</div></div>
+          <div><div class="step-name">OBS Studio</div><div class="step-note" data-i18n="step.later">3 seconds later</div></div>
           <span class="status">Waiting</span>
         </li>
         <li class="step" data-state="idle">
           <span class="tile f" aria-hidden="true">F</span>
-          <div><div class="step-name">FiveM</div><div class="step-note">Once OBS is up</div></div>
+          <div><div class="step-name">FiveM</div><div class="step-note" data-i18n="step.afterObs">Once OBS is up</div></div>
           <span class="status">Waiting</span>
         </li>
       </ol>
@@ -318,31 +365,31 @@
 
   <section class="wrap shot" aria-label="Screenshot">
     <figure>
-      <img src="home.png" width="1400" height="900" alt="The Loadout Home screen: a suggestion to launch FiveM Stream, three setup cards, and a row of pinned apps with green dots on the ones running.">
-      <figcaption>Home shows your setups, what's still running, and the apps you pinned. After a couple of weeks it starts suggesting the setup you usually open at this time of day.</figcaption>
+      <img src="home.png" width="1400" height="900" data-i18n-alt="shot.alt" alt="The Loadout Home screen: a suggestion to launch FiveM Stream, three setup cards, and a row of pinned apps with green dots on the ones running.">
+      <figcaption data-i18n="shot.caption">Home shows your setups, what's still running, and the apps you pinned. After a couple of weeks it starts suggesting the setup you usually open at this time of day.</figcaption>
     </figure>
   </section>
 
   <section class="wrap features" id="features">
-    <h2>Made for the five minutes before you go live</h2>
+    <h2 data-i18n="feat.title">Made for the five minutes before you go live</h2>
     <div class="feature">
-      <h3>Setups</h3>
+      <h3 data-i18n="feat.setups.h">Setups</h3>
       <div>
-        <p>A setup is a list of apps, games and websites that open together. Put them in order, add a pause where one app needs time to load, and launch the whole thing from Home, the tray, or a search.</p>
-        <p>When you're done, close the whole setup in one go instead of hunting through the taskbar.</p>
+        <p data-i18n="feat.setups.p1">A setup is a list of apps, games and websites that open together. Put them in order, add a pause where one app needs time to load, and launch the whole thing from Home, the tray, or a search.</p>
+        <p data-i18n="feat.setups.p2">When you're done, close the whole setup in one go instead of hunting through the taskbar.</p>
       </div>
     </div>
     <div class="feature">
-      <h3>Finds your apps for you</h3>
+      <h3 data-i18n="feat.find.h">Finds your apps for you</h3>
       <div>
-        <p>The first time you open Loadout, it lists the programs installed on your PC and suggests the ones you probably want. Tick them and you're set. You can also drop in any shortcut or .exe.</p>
+        <p data-i18n="feat.find.p">The first time you open Loadout, it lists the programs installed on your PC and suggests the ones you probably want. Tick them and you're set. You can also drop in any shortcut or .exe.</p>
       </div>
     </div>
     <div class="feature">
-      <h3>Out of the way</h3>
+      <h3 data-i18n="feat.away.h">Out of the way</h3>
       <div>
-        <p>Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> from anywhere to search your apps and setups, or give a setup its own shortcut. Loadout can start with Windows and sit in the tray until you need it.</p>
-        <p>Everything stays on your PC. There's no account, and updates install themselves when you say so.</p>
+        <p data-i18n-html="feat.away.p1">Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> from anywhere to search your apps and setups, or give a setup its own shortcut. Loadout can start with Windows and sit in the tray until you need it.</p>
+        <p data-i18n="feat.away.p2">Everything stays on your PC. There's no account, and updates install themselves when you say so.</p>
       </div>
     </div>
   </section>
@@ -350,50 +397,50 @@
   <section class="install" id="install">
     <div class="wrap install-grid">
       <div>
-        <h2>Install</h2>
-        <p class="intro">About a minute, start to finish. No admin rights needed.</p>
+        <h2 data-i18n="install.h">Install</h2>
+        <p class="intro" data-i18n="install.intro">About a minute, start to finish. No admin rights needed.</p>
         <a class="btn js-download" href="https://github.com/ItsBryFrost/loadout-releases/releases/latest">
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download for Windows
+          <span data-i18n="cta.download">Download for Windows</span>
         </a>
       </div>
       <ol class="howto">
-        <li><div><strong>Download the installer</strong><span class="js-file">It's a single .exe file of a few megabytes.</span></div></li>
+        <li><div><strong data-i18n="s1.h">Download the installer</strong><span class="js-file">It's a single .exe file of a few megabytes.</span></div></li>
         <li>
           <div>
-            <strong>Run it</strong>
-            <span>Windows may show a blue box saying it protected your PC. That's because Loadout is new and not yet code-signed.</span>
-            <div class="smartscreen">Click <b>More info</b>, then <b>Run anyway</b>.</div>
+            <strong data-i18n="s2.h">Run it</strong>
+            <span data-i18n="s2.p">Windows may show a blue box saying it protected your PC. That's because Loadout is new and not yet code-signed.</span>
+            <div class="smartscreen" data-i18n-html="s2.tip">Click <b>More info</b>, then <b>Run anyway</b>.</div>
           </div>
         </li>
-        <li><div><strong>Pick your apps</strong><span>Loadout opens and helps you add your apps and build your first setup.</span></div></li>
+        <li><div><strong data-i18n="s3.h">Pick your apps</strong><span data-i18n="s3.p">Loadout opens and helps you add your apps and build your first setup.</span></div></li>
       </ol>
     </div>
   </section>
 
   <section class="wrap faq" id="faq">
     <div class="faq-grid">
-      <h2>Questions</h2>
+      <h2 data-i18n="faq.h">Questions</h2>
       <div>
         <details>
-          <summary>Is it free?</summary>
-          <p>Yes. No trial, no account, no ads.</p>
+          <summary data-i18n="faq.free.q">Is it free?</summary>
+          <p data-i18n="faq.free.a">Yes. No trial, no account, no ads.</p>
         </details>
         <details>
-          <summary>Why does Windows warn me about it?</summary>
-          <p>Windows SmartScreen warns about any app that isn't code-signed and hasn't been downloaded by many people yet. Loadout doesn't need admin rights and installs only into your user folder. If you'd rather not run it, that's fine too.</p>
+          <summary data-i18n="faq.warn.q">Why does Windows warn me about it?</summary>
+          <p data-i18n="faq.warn.a">Windows SmartScreen warns about any app that isn't code-signed and hasn't been downloaded by many people yet. Loadout doesn't need admin rights and installs only into your user folder. If you'd rather not run it, that's fine too.</p>
         </details>
         <details>
-          <summary>Does it work with games from Steam or Epic?</summary>
-          <p>Yes. Find installed apps lists the games you have in Steam and the Epic Games Launcher, and Loadout starts them through the launcher the way their own shortcuts do.</p>
+          <summary data-i18n="faq.games.q">Does it work with games from Steam or Epic?</summary>
+          <p data-i18n="faq.games.a">Yes. Find installed apps lists the games you have in Steam and the Epic Games Launcher, and Loadout starts them through the launcher the way their own shortcuts do.</p>
         </details>
         <details>
-          <summary>How do updates work?</summary>
-          <p>Loadout checks for a new version in the background and shows a small notice. Click it and the update installs and restarts the app. Your setups stay as they were.</p>
+          <summary data-i18n="faq.updates.q">How do updates work?</summary>
+          <p data-i18n="faq.updates.a">Loadout checks for a new version in the background and shows a small notice. Click it and the update installs and restarts the app. Your setups stay as they were.</p>
         </details>
         <details>
-          <summary>How do I uninstall it?</summary>
-          <p>Open Settings › Apps › Installed apps in Windows, find Loadout and choose Uninstall. It also stops Loadout from starting with Windows.</p>
+          <summary data-i18n="faq.uninstall.q">How do I uninstall it?</summary>
+          <p data-i18n="faq.uninstall.a">Open Settings › Apps › Installed apps in Windows, find Loadout and choose Uninstall. It also stops Loadout from starting with Windows.</p>
         </details>
       </div>
     </div>
@@ -402,86 +449,289 @@
 
 <footer>
   <div class="wrap foot">
-    <span>Loadout, for Windows</span>
+    <span data-i18n="footer.tagline">Loadout, for Windows</span>
     <nav aria-label="Links">
-      <a href="https://github.com/ItsBryFrost/loadout-releases/issues/new">Report a problem</a>
-      <a href="https://github.com/ItsBryFrost/loadout-releases/releases">All versions</a>
+      <a href="https://github.com/ItsBryFrost/loadout-releases/issues/new" data-i18n="footer.report">Report a problem</a>
+      <a href="https://github.com/ItsBryFrost/loadout-releases/releases" data-i18n="footer.versions">All versions</a>
     </nav>
   </div>
 </footer>
 
 <script>
 (function () {
-  // Point the download buttons straight at the latest installer.
-  var REPO = "ItsBryFrost/loadout-releases";
-  fetch("https://api.github.com/repos/" + REPO + "/releases/latest", { headers: { Accept: "application/vnd.github+json" } })
+  // ---------- Languages ----------
+  var STRINGS = {
+    en: {
+      "meta.title": "Loadout for Windows",
+      "meta.desc": "Loadout opens all the apps you need for streaming or gaming in one click, in the right order. Free for Windows.",
+      "nav.features": "Features", "nav.install": "Install", "nav.faq": "FAQ", "lang.label": "Language",
+      "hero.title": "Your whole setup,<br> one click.",
+      "hero.lede": "Loadout opens Discord, OBS, your game and everything else you need, in the order you choose. It waits where you tell it to and skips anything that's already open.",
+      "cta.download": "Download for Windows", "cta.free": "Free", "cta.freeVersion": "Free, version {v}", "cta.os": "Windows 10 and 11",
+      "panel.aria": "Example: a setup called FiveM Stream", "panel.sub": "3 apps",
+      "panel.launch": "Launch", "panel.launching": "Launching", "panel.closeAll": "Close all",
+      "step.first": "Opens first", "step.later": "3 seconds later", "step.afterObs": "Once OBS is up",
+      "st.waiting": "Waiting", "st.starting": "Starting", "st.running": "Running", "st.in": "In {n}s",
+      "foot.idle": "Press Launch to see it run.", "foot.opening": "Opening {app}", "foot.wait": "Waiting 3 seconds before OBS",
+      "foot.done": "All 3 apps running.", "foot.closed": "Closed. Press Launch to run it again.",
+      "shot.alt": "The Loadout Home screen: a suggestion to launch FiveM Stream, three setup cards, and a row of pinned apps with green dots on the ones running.",
+      "shot.caption": "Home shows your setups, what's still running, and the apps you pinned. After a couple of weeks it starts suggesting the setup you usually open at this time of day.",
+      "feat.title": "Made for the five minutes before you go live",
+      "feat.setups.h": "Setups",
+      "feat.setups.p1": "A setup is a list of apps, games and websites that open together. Put them in order, add a pause where one app needs time to load, and launch the whole thing from Home, the tray, or a search.",
+      "feat.setups.p2": "When you're done, close the whole setup in one go instead of hunting through the taskbar.",
+      "feat.find.h": "Finds your apps for you",
+      "feat.find.p": "The first time you open Loadout, it lists the programs installed on your PC and suggests the ones you probably want. Tick them and you're set. You can also drop in any shortcut or .exe.",
+      "feat.away.h": "Out of the way",
+      "feat.away.p1": "Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> from anywhere to search your apps and setups, or give a setup its own shortcut. Loadout can start with Windows and sit in the tray until you need it.",
+      "feat.away.p2": "Everything stays on your PC. There's no account, and updates install themselves when you say so.",
+      "install.h": "Install", "install.intro": "About a minute, start to finish. No admin rights needed.",
+      "s1.h": "Download the installer", "s1.p": "It's a single .exe file of a few megabytes.", "s1.file": "{name}, {mb} MB.",
+      "s2.h": "Run it", "s2.p": "Windows may show a blue box saying it protected your PC. That's because Loadout is new and not yet code-signed.",
+      "s2.tip": "Click <b>More info</b>, then <b>Run anyway</b>.",
+      "s3.h": "Pick your apps", "s3.p": "Loadout opens and helps you add your apps and build your first setup.",
+      "faq.h": "Questions",
+      "faq.free.q": "Is it free?", "faq.free.a": "Yes. No trial, no account, no ads.",
+      "faq.warn.q": "Why does Windows warn me about it?",
+      "faq.warn.a": "Windows SmartScreen warns about any app that isn't code-signed and hasn't been downloaded by many people yet. Loadout doesn't need admin rights and installs only into your user folder. If you'd rather not run it, that's fine too.",
+      "faq.games.q": "Does it work with games from Steam or Epic?",
+      "faq.games.a": "Yes. Find installed apps lists the games you have in Steam and the Epic Games Launcher, and Loadout starts them through the launcher the way their own shortcuts do.",
+      "faq.updates.q": "How do updates work?",
+      "faq.updates.a": "Loadout checks for a new version in the background and shows a small notice. Click it and the update installs and restarts the app. Your setups stay as they were.",
+      "faq.uninstall.q": "How do I uninstall it?",
+      "faq.uninstall.a": "Open Settings › Apps › Installed apps in Windows, find Loadout and choose Uninstall. It also stops Loadout from starting with Windows.",
+      "footer.tagline": "Loadout, for Windows", "footer.report": "Report a problem", "footer.versions": "All versions"
+    },
+    pt: {
+      "meta.title": "Loadout para Windows",
+      "meta.desc": "O Loadout abre todos os apps que você usa para fazer live ou jogar com um clique, na ordem certa. Grátis para Windows.",
+      "nav.features": "Recursos", "nav.install": "Instalar", "nav.faq": "Perguntas", "lang.label": "Idioma",
+      "hero.title": "Seu setup inteiro,<br> em um clique.",
+      "hero.lede": "O Loadout abre o Discord, o OBS, seu jogo e tudo mais que você precisa, na ordem que você escolher. Ele espera onde você mandar e pula o que já estiver aberto.",
+      "cta.download": "Baixar para Windows", "cta.free": "Grátis", "cta.freeVersion": "Grátis, versão {v}", "cta.os": "Windows 10 e 11",
+      "panel.aria": "Exemplo: um setup chamado FiveM Stream", "panel.sub": "3 apps",
+      "panel.launch": "Iniciar", "panel.launching": "Iniciando", "panel.closeAll": "Fechar tudo",
+      "step.first": "Abre primeiro", "step.later": "3 segundos depois", "step.afterObs": "Quando o OBS abrir",
+      "st.waiting": "Aguardando", "st.starting": "Abrindo", "st.running": "Aberto", "st.in": "Em {n}s",
+      "foot.idle": "Clique em Iniciar para ver funcionando.", "foot.opening": "Abrindo {app}", "foot.wait": "Esperando 3 segundos antes do OBS",
+      "foot.done": "Os 3 apps estão abertos.", "foot.closed": "Fechado. Clique em Iniciar para rodar de novo.",
+      "shot.alt": "A tela Início do Loadout: uma sugestão para iniciar o FiveM Stream, três setups e uma fileira de apps fixados, com pontos verdes nos que estão abertos.",
+      "shot.caption": "O Início mostra seus setups, o que ainda está aberto e os apps que você fixou. Depois de algumas semanas, ele começa a sugerir o setup que você costuma abrir nesse horário.",
+      "feat.title": "Feito para os cinco minutos antes de você entrar ao vivo",
+      "feat.setups.h": "Setups",
+      "feat.setups.p1": "Um setup é uma lista de apps, jogos e sites que abrem juntos. Coloque na ordem, adicione uma pausa onde um app precisa de tempo para carregar e inicie tudo pelo Início, pela bandeja ou por uma busca.",
+      "feat.setups.p2": "Quando terminar, feche o setup inteiro de uma vez, em vez de caçar janela por janela na barra de tarefas.",
+      "feat.find.h": "Encontra seus apps para você",
+      "feat.find.p": "Na primeira vez que você abre o Loadout, ele lista os programas instalados no seu PC e sugere os que você provavelmente quer. Marque e pronto. Você também pode arrastar qualquer atalho ou .exe.",
+      "feat.away.h": "Sem atrapalhar",
+      "feat.away.p1": "Aperte <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> de qualquer lugar para buscar seus apps e setups, ou dê a um setup o próprio atalho. O Loadout pode iniciar com o Windows e ficar na bandeja até você precisar.",
+      "feat.away.p2": "Tudo fica no seu PC. Não tem conta, e as atualizações se instalam quando você quiser.",
+      "install.h": "Instalar", "install.intro": "Cerca de um minuto, do começo ao fim. Não precisa de permissão de administrador.",
+      "s1.h": "Baixe o instalador", "s1.p": "É um único arquivo .exe de poucos megabytes.", "s1.file": "{name}, {mb} MB.",
+      "s2.h": "Execute", "s2.p": "O Windows pode mostrar uma caixa azul dizendo que protegeu seu PC. Isso acontece porque o Loadout é novo e ainda não tem assinatura digital.",
+      "s2.tip": "Clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b>.",
+      "s3.h": "Escolha seus apps", "s3.p": "O Loadout abre e ajuda você a adicionar seus apps e montar seu primeiro setup.",
+      "faq.h": "Perguntas",
+      "faq.free.q": "É grátis?", "faq.free.a": "Sim. Sem período de teste, sem conta, sem anúncios.",
+      "faq.warn.q": "Por que o Windows mostra um aviso?",
+      "faq.warn.a": "O Windows SmartScreen avisa sobre qualquer app sem assinatura digital que ainda não foi baixado por muita gente. O Loadout não precisa de permissão de administrador e se instala só na sua pasta de usuário. Se preferir não executar, tudo bem.",
+      "faq.games.q": "Funciona com jogos da Steam ou da Epic?",
+      "faq.games.a": "Sim. Encontrar apps instalados lista os jogos que você tem na Steam e na Epic Games Launcher, e o Loadout abre esses jogos pela launcher, do mesmo jeito que os atalhos deles.",
+      "faq.updates.q": "Como funcionam as atualizações?",
+      "faq.updates.a": "O Loadout procura uma versão nova em segundo plano e mostra um aviso pequeno. Clique nele e a atualização é instalada e o app reinicia. Seus setups continuam como estavam.",
+      "faq.uninstall.q": "Como desinstalo?",
+      "faq.uninstall.a": "No Windows, abra Configurações › Aplicativos › Aplicativos instalados, encontre o Loadout e escolha Desinstalar. Isso também impede o Loadout de iniciar com o Windows.",
+      "footer.tagline": "Loadout, para Windows", "footer.report": "Relatar um problema", "footer.versions": "Todas as versões"
+    },
+    es: {
+      "meta.title": "Loadout para Windows",
+      "meta.desc": "Loadout abre todas las apps que usas para hacer stream o jugar con un clic, en el orden correcto. Gratis para Windows.",
+      "nav.features": "Funciones", "nav.install": "Instalar", "nav.faq": "Preguntas", "lang.label": "Idioma",
+      "hero.title": "Todo tu setup,<br> en un clic.",
+      "hero.lede": "Loadout abre Discord, OBS, tu juego y todo lo demás que necesitas, en el orden que elijas. Espera donde le digas y se salta lo que ya esté abierto.",
+      "cta.download": "Descargar para Windows", "cta.free": "Gratis", "cta.freeVersion": "Gratis, versión {v}", "cta.os": "Windows 10 y 11",
+      "panel.aria": "Ejemplo: un setup llamado FiveM Stream", "panel.sub": "3 apps",
+      "panel.launch": "Iniciar", "panel.launching": "Iniciando", "panel.closeAll": "Cerrar todo",
+      "step.first": "Se abre primero", "step.later": "3 segundos después", "step.afterObs": "Cuando OBS esté listo",
+      "st.waiting": "En espera", "st.starting": "Abriendo", "st.running": "Abierto", "st.in": "En {n} s",
+      "foot.idle": "Presiona Iniciar para verlo en acción.", "foot.opening": "Abriendo {app}", "foot.wait": "Esperando 3 segundos antes de OBS",
+      "foot.done": "Las 3 apps están abiertas.", "foot.closed": "Cerrado. Presiona Iniciar para volver a ejecutarlo.",
+      "shot.alt": "La pantalla Inicio de Loadout: una sugerencia para iniciar FiveM Stream, tres setups y una fila de apps fijadas, con puntos verdes en las que están abiertas.",
+      "shot.caption": "Inicio muestra tus setups, lo que sigue abierto y las apps que fijaste. Después de un par de semanas empieza a sugerirte el setup que sueles abrir a esta hora.",
+      "feat.title": "Hecho para los cinco minutos antes de salir en vivo",
+      "feat.setups.h": "Setups",
+      "feat.setups.p1": "Un setup es una lista de apps, juegos y sitios web que se abren juntos. Ordénalos, agrega una pausa donde una app necesite tiempo para cargar e inicia todo desde Inicio, la bandeja o una búsqueda.",
+      "feat.setups.p2": "Cuando termines, cierra el setup completo de una vez en lugar de buscar ventana por ventana en la barra de tareas.",
+      "feat.find.h": "Encuentra tus apps por ti",
+      "feat.find.p": "La primera vez que abres Loadout, muestra los programas instalados en tu PC y sugiere los que probablemente quieres. Márcalos y listo. También puedes arrastrar cualquier acceso directo o .exe.",
+      "feat.away.h": "Sin estorbar",
+      "feat.away.p1": "Presiona <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> desde cualquier lugar para buscar tus apps y setups, o dale a un setup su propio atajo. Loadout puede iniciar con Windows y quedarse en la bandeja hasta que lo necesites.",
+      "feat.away.p2": "Todo se queda en tu PC. No hay cuenta, y las actualizaciones se instalan cuando tú quieras.",
+      "install.h": "Instalar", "install.intro": "Más o menos un minuto, de principio a fin. No necesita permisos de administrador.",
+      "s1.h": "Descarga el instalador", "s1.p": "Es un solo archivo .exe de unos pocos megabytes.", "s1.file": "{name}, {mb} MB.",
+      "s2.h": "Ejecútalo", "s2.p": "Windows puede mostrar un cuadro azul diciendo que protegió tu PC. Es porque Loadout es nuevo y todavía no tiene firma digital.",
+      "s2.tip": "Haz clic en <b>Más información</b> y luego en <b>Ejecutar de todas formas</b>.",
+      "s3.h": "Elige tus apps", "s3.p": "Loadout se abre y te ayuda a agregar tus apps y armar tu primer setup.",
+      "faq.h": "Preguntas",
+      "faq.free.q": "¿Es gratis?", "faq.free.a": "Sí. Sin prueba, sin cuenta, sin anuncios.",
+      "faq.warn.q": "¿Por qué Windows muestra una advertencia?",
+      "faq.warn.a": "Windows SmartScreen advierte sobre cualquier app que no tenga firma digital y que todavía no hayan descargado muchas personas. Loadout no necesita permisos de administrador y se instala solo en tu carpeta de usuario. Si prefieres no ejecutarlo, también está bien.",
+      "faq.games.q": "¿Funciona con juegos de Steam o Epic?",
+      "faq.games.a": "Sí. Buscar apps instaladas muestra los juegos que tienes en Steam y en Epic Games Launcher, y Loadout los abre a través del launcher, igual que sus propios accesos directos.",
+      "faq.updates.q": "¿Cómo funcionan las actualizaciones?",
+      "faq.updates.a": "Loadout busca una versión nueva en segundo plano y muestra un aviso pequeño. Haz clic y la actualización se instala y la app se reinicia. Tus setups quedan como estaban.",
+      "faq.uninstall.q": "¿Cómo lo desinstalo?",
+      "faq.uninstall.a": "En Windows, abre Configuración › Aplicaciones › Aplicaciones instaladas, busca Loadout y elige Desinstalar. Eso también evita que Loadout se inicie con Windows.",
+      "footer.tagline": "Loadout, para Windows", "footer.report": "Reportar un problema", "footer.versions": "Todas las versiones"
+    }
+  };
+  var FLAGS = {
+    en: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#b22234"/><path d="M0 1.6h20M0 3.7h20M0 5.9h20M0 8.1h20M0 10.3h20M0 12.4h20" stroke="#fff" stroke-width="1.08"/><rect width="9" height="7.5" fill="#3c3b6e"/></svg>',
+    pt: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#009c3b"/><path d="M10 1.6 18 7l-8 5.4L2 7z" fill="#ffdf00"/><circle cx="10" cy="7" r="3.1" fill="#002776"/><path d="M7.1 6.3c2-.5 4-.2 5.8.9" stroke="#fff" stroke-width=".5" fill="none"/></svg>',
+    es: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#aa151b"/><rect y="3.5" width="20" height="7" fill="#f1bf00"/></svg>'
+  };
+  var CODES = { en: "EN", pt: "PT", es: "ES" };
+  var HTML_LANG = { en: "en", pt: "pt-BR", es: "es" };
+
+  function pickLanguage() {
+    var saved = null;
+    try { saved = localStorage.getItem("loadout.lang"); } catch (e) {}
+    if (saved && STRINGS[saved]) return saved;
+    var wanted = (navigator.languages || [navigator.language || "en"]);
+    for (var i = 0; i < wanted.length; i++) {
+      var code = String(wanted[i]).slice(0, 2).toLowerCase();
+      if (STRINGS[code]) return code;
+    }
+    return "en";
+  }
+
+  var lang = pickLanguage();
+  function t(key, vars) {
+    var text = (STRINGS[lang] && STRINGS[lang][key]) || STRINGS.en[key] || key;
+    for (var name in vars || {}) text = text.replace("{" + name + "}", vars[name]);
+    return text;
+  }
+
+  var release = null; // filled in once GitHub answers
+
+  function applyLanguage() {
+    document.documentElement.lang = HTML_LANG[lang];
+    document.title = t("meta.title");
+    document.querySelector('meta[name="description"]').setAttribute("content", t("meta.desc"));
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.alt = t(el.dataset.i18nAlt); });
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
+    document.getElementById("lang-flag").innerHTML = FLAGS[lang];
+    document.getElementById("lang-code").textContent = CODES[lang];
+    document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-checked", String(b.dataset.lang === lang)); });
+    document.querySelector(".js-version").textContent = release ? t("cta.freeVersion", { v: release.version }) : t("cta.free");
+    document.querySelector(".js-file").textContent = release ? t("s1.file", { name: release.file, mb: release.mb }) : t("s1.p");
+    demo.render();
+  }
+
+  // Language menu
+  var langBtn = document.getElementById("lang-btn");
+  var langMenu = document.getElementById("lang-menu");
+  document.querySelectorAll("[data-flag]").forEach(function (el) { el.innerHTML = FLAGS[el.dataset.flag]; });
+  function setMenu(open) {
+    langMenu.hidden = !open;
+    langBtn.setAttribute("aria-expanded", String(open));
+    if (open) (langMenu.querySelector('[aria-checked="true"]') || langMenu.querySelector("button")).focus();
+  }
+  langBtn.addEventListener("click", function () { setMenu(langMenu.hidden); });
+  langMenu.addEventListener("click", function (e) {
+    var item = e.target.closest("[data-lang]");
+    if (!item) return;
+    lang = item.dataset.lang;
+    try { localStorage.setItem("loadout.lang", lang); } catch (err) {}
+    setMenu(false);
+    langBtn.focus();
+    applyLanguage();
+  });
+  langMenu.addEventListener("keydown", function (e) {
+    var items = Array.prototype.slice.call(langMenu.querySelectorAll("button"));
+    var i = items.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !langMenu.hidden) { setMenu(false); langBtn.focus(); }
+  });
+  document.addEventListener("click", function (e) {
+    if (!langMenu.hidden && !e.target.closest(".lang")) setMenu(false);
+  });
+
+  // ---------- The demo panel: steps light up in order, the way a real setup launches ----------
+  var demo = (function () {
+    var btn = document.getElementById("demo-run");
+    var label = btn.querySelector("span");
+    var foot = document.getElementById("demo-foot");
+    var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var timers = [];
+    // What each row and the footer show, as keys, so a language switch mid-run keeps up.
+    var state = { phase: "idle", rows: ["waiting", "waiting", "waiting"], wait: 0, foot: ["foot.idle"] };
+
+    function render() {
+      steps.forEach(function (row, i) {
+        var s = state.rows[i];
+        row.dataset.state = s === "waiting" || s === "in" ? "idle" : s;
+        row.querySelector(".status").textContent = s === "in" ? t("st.in", { n: state.wait }) : t("st." + s);
+      });
+      foot.textContent = t(state.foot[0], state.foot[1]);
+      label.textContent = t(state.phase === "idle" ? "panel.launch" : state.phase === "done" ? "panel.closeAll" : "panel.launching");
+      btn.setAttribute("aria-pressed", String(state.phase !== "idle"));
+    }
+    function later(ms, fn) { timers.push(setTimeout(function () { fn(); render(); }, ms)); }
+    function done() { state.phase = "done"; state.rows = ["running", "running", "running"]; state.foot = ["foot.done"]; }
+    function run() {
+      state.phase = "running";
+      if (reduce) { done(); render(); return; }
+      state.rows = ["starting", "waiting", "waiting"];
+      state.foot = ["foot.opening", { app: "Discord" }];
+      render();
+      later(900, function () { state.rows = ["running", "in", "waiting"]; state.wait = 3; state.foot = ["foot.wait"]; });
+      later(1900, function () { state.wait = 2; });
+      later(2900, function () { state.wait = 1; });
+      later(3900, function () { state.rows = ["running", "starting", "waiting"]; state.foot = ["foot.opening", { app: "OBS Studio" }]; });
+      later(4900, function () { state.rows = ["running", "running", "starting"]; state.foot = ["foot.opening", { app: "FiveM" }]; });
+      later(6100, done);
+    }
+    function reset() {
+      timers.forEach(clearTimeout); timers = [];
+      state = { phase: "idle", rows: ["waiting", "waiting", "waiting"], wait: 0, foot: ["foot.closed"] };
+      render();
+    }
+    btn.addEventListener("click", function () { if (state.phase === "idle") run(); else reset(); });
+
+    // Run once by itself when the panel first comes into view.
+    if (!reduce && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); setTimeout(function () { if (state.phase === "idle") run(); }, 600); }
+      }, { threshold: 0.4 });
+      io.observe(document.querySelector(".panel"));
+    }
+    return { render: render };
+  })();
+
+  applyLanguage();
+
+  // ---------- Point the download buttons straight at the latest installer ----------
+  fetch("https://api.github.com/repos/ItsBryFrost/loadout-releases/releases/latest", { headers: { Accept: "application/vnd.github+json" } })
     .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
     .then(function (rel) {
       var exe = (rel.assets || []).find(function (a) { return /-setup\.exe$/i.test(a.name); });
       if (!exe) return;
       document.querySelectorAll(".js-download").forEach(function (a) { a.href = exe.browser_download_url; });
-      var v = String(rel.tag_name || "").replace(/^v/, "");
-      var mb = (exe.size / 1048576).toFixed(1);
-      if (v) document.querySelector(".js-version").textContent = "Free, version " + v;
-      document.querySelector(".js-file").textContent = exe.name + ", " + mb + " MB.";
+      release = {
+        version: String(rel.tag_name || "").replace(/^v/, ""),
+        file: exe.name,
+        mb: (exe.size / 1048576).toLocaleString(HTML_LANG[lang], { maximumFractionDigits: 1, minimumFractionDigits: 1 })
+      };
+      applyLanguage();
     })
     .catch(function () { /* the buttons already link to the releases page */ });
-
-  // The demo panel: steps light up in order, the way a real setup launches.
-  var btn = document.getElementById("demo-run");
-  var label = btn.querySelector("span");
-  var foot = document.getElementById("demo-foot");
-  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timers = [];
-  var running = false;
-
-  function set(i, state, text) {
-    steps[i].dataset.state = state;
-    steps[i].querySelector(".status").textContent = text;
-  }
-  function later(ms, fn) { timers.push(setTimeout(fn, ms)); }
-  function reset() {
-    timers.forEach(clearTimeout); timers = [];
-    steps.forEach(function (_, i) { set(i, "idle", "Waiting"); });
-    running = false;
-    btn.setAttribute("aria-pressed", "false");
-    label.textContent = "Launch";
-  }
-  function done() {
-    foot.textContent = "All 3 apps running.";
-    label.textContent = "Close all";
-  }
-  function run() {
-    running = true;
-    btn.setAttribute("aria-pressed", "true");
-    label.textContent = "Launching";
-    if (reduce) {
-      steps.forEach(function (_, i) { set(i, "running", "Running"); });
-      done();
-      return;
-    }
-    foot.textContent = "Opening Discord";
-    set(0, "starting", "Starting");
-    later(900, function () { set(0, "running", "Running"); set(1, "idle", "In 3s"); foot.textContent = "Waiting 3 seconds before OBS"; });
-    later(1900, function () { set(1, "idle", "In 2s"); });
-    later(2900, function () { set(1, "idle", "In 1s"); });
-    later(3900, function () { set(1, "starting", "Starting"); foot.textContent = "Opening OBS Studio"; });
-    later(4900, function () { set(1, "running", "Running"); set(2, "starting", "Starting"); foot.textContent = "Opening FiveM"; });
-    later(6100, function () { set(2, "running", "Running"); done(); });
-  }
-  btn.addEventListener("click", function () {
-    if (running) { reset(); foot.textContent = "Closed. Press Launch to run it again."; }
-    else run();
-  });
-
-  // Run once by itself when the panel first comes into view.
-  if (!reduce && "IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { io.disconnect(); setTimeout(function () { if (!running) run(); }, 600); }
-    }, { threshold: 0.4 });
-    io.observe(document.querySelector(".panel"));
-  }
 })();
 </script>
 </body>
