@@ -1,5 +1,23 @@
 [
   {
+    "version": "0.8.1",
+    "date": "2026-11-24",
+    "changes": [
+      {
+        "title": {
+          "en": "Your Discord status links to the website",
+          "pt": "Seu status do Discord leva ao site",
+          "es": "Tu estado de Discord lleva al sitio web"
+        },
+        "text": {
+          "en": "The Loadout status on your Discord profile now has a Windows app launcher line. Tapping that line or the logo opens the Loadout website, so friends who see it can find the app.",
+          "pt": "O status do Loadout no seu perfil do Discord agora tem a linha Windows app launcher. Tocar nessa linha ou no logo abre o site do Loadout, para que amigos que virem possam achar o app.",
+          "es": "El estado de Loadout en tu perfil de Discord ahora tiene la línea Windows app launcher. Al tocar esa línea o el logo se abre el sitio web de Loadout, para que tus amigos que lo vean puedan encontrar la app."
+        }
+      }
+    ]
+  },
+  {
     "version": "0.8.0",
     "date": "2026-11-24",
     "changes": [
