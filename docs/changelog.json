@@ -1,5 +1,23 @@
 [
   {
+    "version": "0.8.2",
+    "date": "2026-11-26",
+    "changes": [
+      {
+        "title": {
+          "en": "Taskbar pin gets its logo back",
+          "pt": "O atalho na barra de tarefas volta a ter o logo",
+          "es": "El acceso en la barra de tareas recupera su logo"
+        },
+        "text": {
+          "en": "If you pinned Loadout to the taskbar before 0.8.0, the pin showed a blank icon after the program was renamed to Loadout Launcher. Loadout now fixes the pin by itself, so it shows the logo and opens Loadout again.",
+          "pt": "Se você fixou o Loadout na barra de tarefas antes da 0.8.0, o atalho ficou com um ícone em branco depois que o programa passou a se chamar Loadout Launcher. Agora o Loadout conserta o atalho sozinho, e ele volta a mostrar o logo e abrir o Loadout.",
+          "es": "Si fijaste Loadout en la barra de tareas antes de la 0.8.0, el acceso quedó con un icono en blanco después de que el programa pasó a llamarse Loadout Launcher. Ahora Loadout arregla el acceso solo, y vuelve a mostrar el logo y abrir Loadout."
+        }
+      }
+    ]
+  },
+  {
     "version": "0.8.1",
     "date": "2026-11-24",
     "changes": [
